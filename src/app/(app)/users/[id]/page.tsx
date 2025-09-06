@@ -16,6 +16,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { OrderHistoryChart } from '@/components/order-history-chart';
 
 export default function UserDetailsPage({ params }: { params: { id: string } }) {
   const user = allUsers.find((u) => u.id === params.id);
@@ -86,7 +87,7 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
             <Separator />
             <div className="flex justify-between items-center py-2">
               <span className="text-muted-foreground">User Type</span>
-              <Badge variant="secondary" className="capitalize">{user.userType}</Badge>
+              <Badge variant="secondary" className="capitalize">{user.userType.replace('-', ' ')}</Badge>
             </div>
             <Separator />
             <div className="flex justify-between items-center py-2">
@@ -114,7 +115,7 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
               <CardDescription>A list of recent orders placed by the user.</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground text-sm">Order history and payment graphs will be shown here.</p>
+              <OrderHistoryChart />
             </CardContent>
           </Card>
            <Card>

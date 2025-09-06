@@ -9,7 +9,9 @@ import {
 } from '@/components/ui/sidebar';
 import { UserNav } from '@/components/user-nav';
 import { MainNav } from '@/components/main-nav';
-import { Utensils } from 'lucide-react';
+import { Bell, MessageCircle, Search, Settings } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export default function AppLayout({
   children,
@@ -20,11 +22,9 @@ export default function AppLayout({
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader>
-          <div className="flex items-center gap-2 p-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-              <Utensils className="h-5 w-5" />
-            </div>
-            <span className="text-lg font-semibold">MealPlanHQ</span>
+          <div className="p-4">
+            <h1 className="text-2xl font-bold text-primary">Sedap.</h1>
+            <p className="text-xs text-muted-foreground">Modern Admin Dashboard</p>
           </div>
         </SidebarHeader>
         <SidebarContent>
@@ -35,9 +35,29 @@ export default function AppLayout({
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 sm:px-6">
           <SidebarTrigger className="sm:hidden" />
-          <div className="ml-auto">
+          <div className="relative flex-1">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search here"
+              className="w-full rounded-lg bg-secondary pl-8 md:w-[200px] lg:w-[336px]"
+            />
+          </div>
+          <div className="ml-auto flex items-center gap-2">
+             <Button variant="ghost" size="icon" className="rounded-full">
+                <MessageCircle className="h-5 w-5" />
+                <span className="sr-only">Messages</span>
+            </Button>
+            <Button variant="ghost" size="icon" className="rounded-full">
+                <Bell className="h-5 w-5" />
+                <span className="sr-only">Notifications</span>
+            </Button>
+             <Button variant="ghost" size="icon" className="rounded-full">
+                <Settings className="h-5 w-5" />
+                <span className="sr-only">Settings</span>
+            </Button>
             <UserNav />
           </div>
         </header>

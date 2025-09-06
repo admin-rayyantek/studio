@@ -29,16 +29,17 @@ export function MainNav() {
   const pathname = usePathname();
 
   return (
-    <SidebarMenu>
+    <SidebarMenu className="p-4">
       {navItems.map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton
             asChild
             isActive={pathname.startsWith(item.href) && (item.href === '/' ? pathname === '/' : true)}
             tooltip={item.label}
+             className="justify-start"
           >
             <Link href={item.href}>
-              <item.icon />
+              <item.icon className="h-5 w-5" />
               <span>{item.label}</span>
             </Link>
           </SidebarMenuButton>

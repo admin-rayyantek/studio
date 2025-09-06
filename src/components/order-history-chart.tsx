@@ -1,13 +1,6 @@
 'use client';
 
-import { Bar, BarChart, Line, LineChart, XAxis, YAxis, Tooltip } from 'recharts';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import {
   ChartContainer,
   ChartTooltipContent,
@@ -16,28 +9,30 @@ import {
 import { orderHistoryData } from '@/lib/data';
 
 const chartConfig = {
-  orders: {
-    label: 'Orders',
-    color: 'hsl(var(--accent))',
+  revenue: {
+    label: 'Revenue',
+    color: 'hsl(var(--chart-3))',
   },
-  balance: {
-    label: 'Balance',
-    color: 'hsl(var(--primary))',
+  previous: {
+    label: 'Previous',
+    color: 'hsl(var(--chart-1))',
   },
 } satisfies ChartConfig;
 
+const data = orderHistoryData.map(item => ({
+    ...item,
+    revenue: item.balance,
+    previous: item.balance - Math.random() * 500,
+}));
+
+
 export function OrderHistoryChart() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Order Overview</CardTitle>
-        <CardDescription>A summary of orders and balances over the last 7 days.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig} className="h-[250px] w-full">
-          <LineChart
+    <ChartContainer config={chartConfig} className="h-[250px] w-full">
+      <ResponsiveContainer>
+        <LineChart
             accessibilityLayer
-            data={orderHistoryData}
+            data={data}
             margin={{
               left: 12,
               right: 12,
@@ -48,18 +43,9 @@ export function OrderHistoryChart() {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
+              tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { weekday: 'short' })}
             />
-            <YAxis
-                yAxisId="orders"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickCount={3}
-            />
-            <YAxis
-                yAxisId="balance"
-                orientation="right"
+             <YAxis
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
@@ -68,24 +54,21 @@ export function OrderHistoryChart() {
             />
             <Tooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
             <Line
-              dataKey="orders"
-              yAxisId="orders"
-              type="natural"
-              stroke="var(--color-orders)"
-              strokeWidth={2}
-              dot={false}
+              dataKey="revenue"
+              type="monotone"
+              stroke="var(--color-revenue)"
+              strokeWidth={3}
+              dot={true}
             />
-            <Line
-              dataKey="balance"
-              yAxisId="balance"
-              type="natural"
-              stroke="var(--color-balance)"
-              strokeWidth={2}
-              dot={false}
+             <Line
+              dataKey="previous"
+              type="monotone"
+              stroke="var(--color-previous)"
+              strokeWidth={3}
+              dot={true}
             />
           </LineChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+      </ResponsiveContainer>
+    </ChartContainer>
   );
 }

@@ -19,9 +19,9 @@ export function UserNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-9 w-9">
-            <AvatarImage src="https://i.pravatar.cc/150?u=admin" alt="@admin" />
+        <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+          <Avatar className="h-10 w-10">
+            <AvatarImage src="https://i.pravatar.cc/150?u=admin" alt="@admin" data-ai-hint="person face" />
             <AvatarFallback>AD</AvatarFallback>
           </Avatar>
         </Button>
@@ -31,7 +31,7 @@ export function UserNav() {
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">Admin</p>
             <p className="text-xs leading-none text-muted-foreground">
-              admin@mealplanhq.com
+              admin@sedap.com
             </p>
           </div>
         </DropdownMenuLabel>
