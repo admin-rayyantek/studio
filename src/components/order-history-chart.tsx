@@ -1,6 +1,6 @@
 'use client';
 
-import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import {
   ChartContainer,
   ChartTooltipContent,
@@ -9,21 +9,11 @@ import {
 import { orderHistoryData } from '@/lib/data';
 
 const chartConfig = {
-  revenue: {
-    label: 'Revenue',
-    color: 'hsl(var(--chart-3))',
-  },
-  previous: {
-    label: 'Previous',
+  orders: {
+    label: 'Orders',
     color: 'hsl(var(--chart-1))',
   },
 } satisfies ChartConfig;
-
-const data = orderHistoryData.map(item => ({
-    ...item,
-    revenue: item.balance,
-    previous: item.balance - Math.random() * 500,
-}));
 
 
 export function OrderHistoryChart() {
@@ -32,12 +22,13 @@ export function OrderHistoryChart() {
       <ResponsiveContainer>
         <LineChart
             accessibilityLayer
-            data={data}
+            data={orderHistoryData}
             margin={{
               left: 12,
               right: 12,
             }}
           >
+            <CartesianGrid vertical={false} />
             <XAxis
               dataKey="date"
               tickLine={false}
@@ -49,21 +40,13 @@ export function OrderHistoryChart() {
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                tickCount={3}
-                tickFormatter={(value) => `$${value/1000}k`}
+                tickCount={4}
             />
-            <Tooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
+            <Tooltip content={<ChartTooltipContent indicator="dot" />} />
             <Line
-              dataKey="revenue"
+              dataKey="orders"
               type="monotone"
-              stroke="var(--color-revenue)"
-              strokeWidth={3}
-              dot={true}
-            />
-             <Line
-              dataKey="previous"
-              type="monotone"
-              stroke="var(--color-previous)"
+              stroke="var(--color-orders)"
               strokeWidth={3}
               dot={true}
             />

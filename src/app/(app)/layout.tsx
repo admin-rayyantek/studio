@@ -23,8 +23,8 @@ export default function AppLayout({
       <Sidebar>
         <SidebarHeader>
           <div className="p-4">
-            <h1 className="text-2xl font-bold text-primary">Sedap.</h1>
-            <p className="text-xs text-muted-foreground">Modern Admin Dashboard</p>
+            <h1 className="text-2xl font-bold text-primary">Meal Planner.</h1>
+            <p className="text-xs text-muted-foreground">Modern Org Meal Ordering App</p>
           </div>
         </SidebarHeader>
         <SidebarContent>

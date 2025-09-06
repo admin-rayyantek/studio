@@ -205,13 +205,13 @@ export const menuEvents: MenuEvent[] = [
 
 
 export const orderHistoryData = [
-  { date: '2023-10-01', orders: 150, balance: 12000 },
-  { date: '2023-10-02', orders: 155, balance: 18400 },
-  { date: '2023-10-03', orders: 160, balance: 15800 },
-  { date: '2023-10-04', orders: 145, balance: 21600 },
-  { date: '2023-10-05', orders: 165, balance: 13200 },
-  { date: '2023-10-06', orders: 170, balance: 19600 },
-  { date: '2023-10-07', orders: 168, balance: 13440 },
+  { date: '2023-10-01', orders: 150, revenue: 12000 },
+  { date: '2023-10-02', orders: 155, revenue: 18400 },
+  { date: '2023-10-03', orders: 160, revenue: 15800 },
+  { date: '2023-10-04', orders: 145, revenue: 21600 },
+  { date: '2023-10-05', orders: 165, revenue: 13200 },
+  { date: '2023-10-06', orders: 170, revenue: 19600 },
+  { date: '2023-10-07', orders: 168, revenue: 13440 },
 ];
 
 export const recentOrders = [
@@ -251,3 +251,14 @@ export const recentOrders = [
     amount: '+$6.50',
   },
 ];
+
+
+export const dashboardStats = {
+  todaysOrders: 84,
+  todaysMenu: 'Cheese Pide',
+  totalActiveUsers: allUsers.filter(u => u.active).length,
+  outstandingBalances: allUsers.reduce((acc, user) => user.balance < 0 ? acc + Math.abs(user.balance) : acc, 0),
+  unpaidUsers: allUsers.filter(u => u.balance < 0).length,
+  mostSellingItem: 'Chicken Kebab',
+  financialAidLastMonth: 450.75,
+};

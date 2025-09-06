@@ -21,7 +21,7 @@ export function KpiCard({ title, value, description, Icon, iconBg, iconColor }: 
             </div>
             <div>
                 <p className="text-sm text-muted-foreground">{title}</p>
-                <p className="text-2xl font-bold">{value}</p>
+                <p className="text-xl font-bold">{value}</p>
                  <p className="text-xs text-muted-foreground">{description}</p>
             </div>
         </div>
