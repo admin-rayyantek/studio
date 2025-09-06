@@ -94,6 +94,7 @@ export default function VendorsPage() {
                       <TableRow>
                         <TableHead>Menu Item</TableHead>
                         <TableHead>Description</TableHead>
+                        <TableHead>Allergens</TableHead>
                         <TableHead className="text-right">Price</TableHead>
                       </TableRow>
                     </TableHeader>
@@ -104,6 +105,15 @@ export default function VendorsPage() {
                             {item.name}
                           </TableCell>
                           <TableCell>{item.description}</TableCell>
+                           <TableCell>
+                            {item.allergens && item.allergens.length > 0 ? (
+                              <div className="flex flex-wrap gap-1">
+                                {item.allergens.map((allergen) => (
+                                  <Badge key={allergen} variant="secondary">{allergen}</Badge>
+                                ))}
+                              </div>
+                            ) : 'None'}
+                          </TableCell>
                           <TableCell className="text-right">
                             <Badge variant="outline">
                               ${item.price.toFixed(2)}

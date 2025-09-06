@@ -1,5 +1,23 @@
 import type { Student, Order, MenuEvent, Vendor, User } from '@/types';
 
+export const allergens = [
+  'Milk',
+  'Eggs',
+  'Fish',
+  'Shellfish',
+  'Tree Nuts',
+  'Peanuts',
+  'Wheat',
+  'Soy',
+  'Sesame',
+  'Gluten',
+  'Corn',
+  'Mustard',
+  'Sulfites',
+  'Celery',
+  'Lupin',
+];
+
 export const students: Student[] = [
   {
     id: 'S001',
@@ -52,6 +70,7 @@ export const allUsers: User[] = [
     dateJoined: '2023-01-15',
     userType: 'student-tadris',
     primaryPayment: 'card',
+    allergies: ['Peanuts']
   },
   {
     id: 'S002',
@@ -91,6 +110,7 @@ export const allUsers: User[] = [
     dateJoined: '2023-03-10',
     userType: 'student-tanwir',
     primaryPayment: 'FACTS',
+    allergies: ['Gluten', 'Soy']
   },
     {
     id: 'S004',
@@ -166,9 +186,9 @@ export const vendors: Vendor[] = [
     description: 'Authentic Turkish Pide and more.',
     logo: 'https://picsum.photos/seed/pide/200/200',
     menu: [
-      { id: 'M001', name: 'Lahmacun', description: 'Thin Turkish pizza with minced meat.', price: 10.99 },
-      { id: 'M002', name: 'Cheese Pide', description: 'Pide with delicious cheese.', price: 12.99 },
-      { id: 'M003', name: 'Ayran', description: 'Refreshing yogurt drink.', price: 5.99 },
+      { id: 'M001', name: 'Lahmacun', description: 'Thin Turkish pizza with minced meat.', price: 10.99, allergens: ['Gluten', 'Wheat'] },
+      { id: 'M002', name: 'Cheese Pide', description: 'Pide with delicious cheese.', price: 12.99, allergens: ['Gluten', 'Milk', 'Wheat'] },
+      { id: 'M003', name: 'Ayran', description: 'Refreshing yogurt drink.', price: 5.99, allergens: ['Milk'] },
     ],
   },
   {
@@ -178,8 +198,8 @@ export const vendors: Vendor[] = [
     logo: 'https://picsum.photos/seed/kebab/200/200',
     menu: [
       { id: 'M004', name: 'Chicken Kebab', description: 'Grilled chicken skewers.', price: 3.50 },
-      { id: 'M005', name: 'Lamb Shawarma', description: 'Slow-roasted lamb in a wrap.', price: 3.50 },
-      { id: 'M006', name: 'Hummus & Pita', description: 'Classic hummus with fresh pita.', price: 6.50 },
+      { id: 'M005', name: 'Lamb Shawarma', description: 'Slow-roasted lamb in a wrap.', price: 3.50, allergens: ['Gluten', 'Wheat'] },
+      { id: 'M006', name: 'Hummus & Pita', description: 'Classic hummus with fresh pita.', price: 6.50, allergens: ['Sesame', 'Gluten', 'Wheat'] },
     ],
   },
   {
@@ -188,9 +208,9 @@ export const vendors: Vendor[] = [
     description: 'Traditional Moroccan tagines.',
     logo: 'https://picsum.photos/seed/tagine/200/200',
     menu: [
-      { id: 'M007', name: 'Chicken Tagine', description: 'Slow-cooked chicken with olives.', price: 11.99 },
-      { id: 'M008', name: 'Vegetable Tagine', description: 'A mix of fresh vegetables.', price: 11.99 },
-      { id: 'M009', name: 'Couscous Salad', description: 'Light and refreshing salad.', price: 8.99 },
+      { id: 'M007', name: 'Chicken Tagine', description: 'Slow-cooked chicken with olives.', price: 11.99, allergens: ['Celery'] },
+      { id: 'M008', name: 'Vegetable Tagine', description: 'A mix of fresh vegetables.', price: 11.99, allergens: ['Celery'] },
+      { id: 'M009', name: 'Couscous Salad', description: 'Light and refreshing salad.', price: 8.99, allergens: ['Gluten', 'Wheat'] },
     ],
   },
 ];
@@ -221,6 +241,7 @@ export const recentOrders = [
     email: 'aisha.khan@example.com',
     meal: 'Chicken Shawarma',
     amount: '+$7.50',
+    studentId: 'S001',
   },
   {
     avatar: 'https://avatar.iran.liara.run/public/boy?username=Yusuf+Ahmed',
@@ -228,6 +249,7 @@ export const recentOrders = [
     email: 'yusuf.ahmed@example.com',
     meal: 'Beef Kofta',
     amount: '+$8.00',
+    studentId: 'S002',
   },
   {
     avatar: 'https://avatar.iran.liara.run/public/girl?username=Fatima+Al-Fassi',
@@ -235,6 +257,7 @@ export const recentOrders = [
     email: 'fatima.alfassi@example.com',
     meal: 'Vegetable Tagine',
     amount: '+$7.00',
+    studentId: 'S003',
   },
   {
     avatar: 'https://avatar.iran.liara.run/public/boy?username=Omar+Abdullah',
@@ -242,6 +265,7 @@ export const recentOrders = [
     email: 'omar.abdullah@example.com',
     meal: 'Lamb Burger & Fries',
     amount: '+$8.50',
+    studentId: 'S004',
   },
   {
     avatar: 'https://avatar.iran.liara.run/public/girl?username=Layla+Ibrahim',
@@ -249,6 +273,7 @@ export const recentOrders = [
     email: 'layla.ibrahim@example.com',
     meal: 'Fattoush Salad',
     amount: '+$6.50',
+    studentId: 'S005',
   },
 ];
 

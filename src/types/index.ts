@@ -1,5 +1,6 @@
 
 
+
 export type Student = {
   id: string;
   name: string;
@@ -20,6 +21,7 @@ export type User = {
   dateJoined: string;
   userType: 'student-tadris' | 'student-tahfiz' | 'student-tanwir' | 'staff';
   primaryPayment: 'cash' | 'card' | 'FACTS' | 'financial-aid';
+  allergies?: string[];
 }
 
 export type Order = {
@@ -40,6 +42,7 @@ export type VendorMenuItem = {
   name: string;
   description: string;
   price: number;
+  allergens?: string[];
 };
 
 export type Vendor = {
@@ -49,3 +52,4 @@ export type Vendor = {
   logo: string;
   menu: VendorMenuItem[];
 };
+

@@ -96,6 +96,15 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
               <span>{user.dateJoined}</span>
             </div>
             <Separator />
+             <div className="py-2">
+              <span className="text-muted-foreground">Allergies</span>
+              <div className="flex flex-wrap gap-1 mt-1">
+                {user.allergies && user.allergies.length > 0 ? user.allergies.map(allergy => (
+                  <Badge key={allergy} variant="outline">{allergy}</Badge>
+                )) : <p>None</p>}
+              </div>
+            </div>
+            <Separator />
             <div className="flex justify-between items-center py-2">
               <span className="text-muted-foreground">Balance</span>
               <Badge variant={user.balance < 0 ? 'destructive' : 'outline'}>

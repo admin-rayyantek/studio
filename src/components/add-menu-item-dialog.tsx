@@ -12,6 +12,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,11 +25,15 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import * as React from 'react';
+import { allergens } from '@/lib/data';
+import { Checkbox } from '@/components/ui/checkbox';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const formSchema = z.object({
   name: z.string().min(1, 'Item name is required.'),
   description: z.string().min(1, 'Description is required.'),
   price: z.coerce.number().min(0.01, 'Price must be greater than 0.'),
+  allergens: z.array(z.string()).optional(),
 });
 
 type AddMenuItemDialogProps = {
@@ -47,6 +52,7 @@ export function AddMenuItemDialog({
       name: '',
       description: '',
       price: 0,
+      allergens: [],
     },
   });
 
@@ -68,7 +74,7 @@ export function AddMenuItemDialog({
           Add Menu Item
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-xl">
         <DialogHeader>
           <DialogTitle>Add New Menu Item</DialogTitle>
           <DialogDescription>
@@ -115,6 +121,61 @@ export function AddMenuItemDialog({
                   <FormControl>
                     <Input type="number" step="0.01" {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="allergens"
+              render={() => (
+                <FormItem>
+                  <div className="mb-4">
+                    <FormLabel className="text-base">Allergens</FormLabel>
+                    <FormDescription>
+                      Select the allergens present in this menu item.
+                    </FormDescription>
+                  </div>
+                  <ScrollArea className="h-40 w-full rounded-md border">
+                    <div className="p-4 grid grid-cols-2 gap-4">
+                      {allergens.map((allergen) => (
+                        <FormField
+                          key={allergen}
+                          control={form.control}
+                          name="allergens"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={allergen}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(allergen)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([
+                                            ...(field.value || []),
+                                            allergen,
+                                          ])
+                                        : field.onChange(
+                                            field.value?.filter(
+                                              (value) => value !== allergen
+                                            )
+                                          );
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {allergen}
+                                </FormLabel>
+                              </FormItem>
+                            );
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </ScrollArea>
                   <FormMessage />
                 </FormItem>
               )}
