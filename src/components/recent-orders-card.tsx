@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { recentOrders } from '@/lib/data';
+import Image from 'next/image';
 
 export function RecentOrdersCard() {
   return (
@@ -26,7 +27,7 @@ export function RecentOrdersCard() {
           {recentOrders.map((order, index) => (
             <div className="flex items-center" key={index}>
               <Avatar className="h-9 w-9">
-                <AvatarImage src={order.avatar} alt="Avatar" data-ai-hint="muslim person"/>
+                <AvatarImage src={order.avatar} alt="Avatar" />
                 <AvatarFallback>{order.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
               </Avatar>
               <div className="ml-4 space-y-1">

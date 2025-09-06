@@ -63,7 +63,6 @@ export default function BillingPage() {
                       height="40"
                       src={student.avatar}
                       width="40"
-                      data-ai-hint="muslim person"
                     />
                   </TableCell>
                   <TableCell className="font-medium">{student.name}</TableCell>
