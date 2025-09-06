@@ -1,5 +1,6 @@
 
-import type { Student, Order, MenuEvent, Vendor } from '@/types';
+
+import type { Student, Order, MenuEvent, Vendor, User } from '@/types';
 
 export const students: Student[] = [
   {
@@ -38,6 +39,89 @@ export const students: Student[] = [
     balance: 5.5,
   },
 ];
+
+
+export const allUsers: User[] = [
+  {
+    id: 'S001',
+    name: 'Olivia Martin',
+    email: 'olivia.martin@example.com',
+    avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+    balance: 120.5,
+    orgId: 'ORG001',
+    gender: 'female',
+    active: true,
+    dateJoined: '2023-01-15',
+    userType: 'student-tadris',
+    primaryPayment: 'card',
+  },
+  {
+    id: 'S002',
+    name: 'Jackson Lee',
+    email: 'jackson.lee@example.com',
+    avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026705d',
+    balance: 85.0,
+    orgId: 'ORG002',
+    gender: 'male',
+    active: true,
+    dateJoined: '2023-02-20',
+    userType: 'student-tahfiz',
+    primaryPayment: 'cash',
+  },
+  {
+    id: 'STF001',
+    name: 'Mr. Alan Turing',
+    email: 'alan.turing@example.com',
+    avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026709d',
+    balance: 0,
+    orgId: 'STF-A1',
+    gender: 'male',
+    active: true,
+    dateJoined: '2022-08-01',
+    userType: 'staff',
+    primaryPayment: 'card',
+  },
+  {
+    id: 'S003',
+    name: 'Isabella Nguyen',
+    email: 'isabella.nguyen@example.com',
+    avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026706d',
+    balance: -25.0,
+    orgId: 'ORG003',
+    gender: 'female',
+    active: false,
+    dateJoined: '2023-03-10',
+    userType: 'student-tanwir',
+    primaryPayment: 'FACTS',
+  },
+    {
+    id: 'S004',
+    name: 'William Kim',
+    email: 'will@example.com',
+    avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026707d',
+    balance: -15.2,
+    orgId: 'ORG004',
+    gender: 'male',
+    active: true,
+    dateJoined: '2023-04-05',
+    userType: 'student-tadris',
+    primaryPayment: 'financial-aid',
+  },
+  {
+    id: 'S005',
+    name: 'Sofia Davis',
+    email: 'sofia.davis@example.com',
+    avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026708d',
+    balance: 5.5,
+    orgId: 'ORG005',
+    gender: 'female',
+    active: true,
+    dateJoined: '2023-05-12',
+    userType: 'student-tahfiz',
+    primaryPayment: 'card',
+  },
+];
+
 
 export const orders: Order[] = [
   {

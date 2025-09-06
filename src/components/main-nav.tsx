@@ -20,7 +20,7 @@ import {
 const navItems = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/menu', label: 'Menu', icon: Calendar },
-  { href: '/billing', label: 'Billing', icon: Users },
+  { href: '/users', label: 'Users', icon: Users },
   { href: '/predictions', label: 'Predictions', icon: Bot },
   { href: '/vendors', label: 'Vendors', icon: Store },
 ];
@@ -34,7 +34,7 @@ export function MainNav() {
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton
             asChild
-            isActive={pathname === item.href}
+            isActive={pathname.startsWith(item.href) && (item.href === '/' ? pathname === '/' : true)}
             tooltip={item.label}
           >
             <Link href={item.href}>

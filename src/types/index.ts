@@ -1,4 +1,5 @@
 
+
 export type Student = {
   id: string;
   name: string;
@@ -6,6 +7,20 @@ export type Student = {
   avatar: string;
   balance: number;
 };
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  balance: number;
+  orgId?: string;
+  gender: 'male' | 'female';
+  active: boolean;
+  dateJoined: string;
+  userType: 'student-tadris' | 'student-tahfiz' | 'student-tanwir' | 'staff';
+  primaryPayment: 'cash' | 'card' | 'FACTS' | 'financial-aid';
+}
 
 export type Order = {
   id: string;
