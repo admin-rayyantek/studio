@@ -21,7 +21,7 @@ export function UserNav() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar className="h-10 w-10">
-            <AvatarImage src="https://i.pravatar.cc/150?u=admin" alt="@admin" data-ai-hint="person face" />
+            <AvatarImage src="https://i.pravatar.cc/150?u=admin-male" alt="@admin" data-ai-hint="muslim male" />
             <AvatarFallback>AD</AvatarFallback>
           </Avatar>
         </Button>

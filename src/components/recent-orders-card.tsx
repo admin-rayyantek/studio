@@ -26,7 +26,7 @@ export function RecentOrdersCard() {
           {recentOrders.map((order, index) => (
             <div className="flex items-center" key={index}>
               <Avatar className="h-9 w-9">
-                <AvatarImage src={order.avatar} alt="Avatar" data-ai-hint="person portrait"/>
+                <AvatarImage src={order.avatar} alt="Avatar" data-ai-hint="muslim person"/>
                 <AvatarFallback>{order.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
               </Avatar>
               <div className="ml-4 space-y-1">

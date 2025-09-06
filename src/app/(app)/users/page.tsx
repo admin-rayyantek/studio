@@ -122,7 +122,7 @@ export default function UsersPage() {
                         height="32"
                         src={user.avatar}
                         width="32"
-                        data-ai-hint="person portrait"
+                        data-ai-hint={user.gender === 'male' ? 'muslim male' : 'muslim female'}
                       />
                       <div className="flex flex-col">
                         <span>{user.name}</span>

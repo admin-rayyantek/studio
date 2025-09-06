@@ -73,7 +73,7 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
         <Card className="lg:col-span-1">
           <CardHeader className="items-center">
             <Avatar className="h-24 w-24 mb-4">
-              <AvatarImage src={user.avatar} alt={user.name} data-ai-hint="person portrait"/>
+              <AvatarImage src={user.avatar} alt={user.name} data-ai-hint={user.gender === 'male' ? 'muslim male' : 'muslim female'}/>
               <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
             </Avatar>
             <CardTitle className="text-2xl">{user.name}</CardTitle>
