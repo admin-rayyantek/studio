@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import * as React from 'react';
 import {
   Table,
   TableBody,
@@ -21,18 +24,41 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
-import { vendors } from '@/lib/data';
+import { vendors as initialVendors, Vendor } from '@/lib/data';
+import { Button } from '@/components/ui/button';
+import { PlusCircle } from 'lucide-react';
+import { AddVendorDialog } from '@/components/add-vendor-dialog';
+import { AddMenuItemDialog } from '@/components/add-menu-item-dialog';
 
 export default function VendorsPage() {
+  const [vendors, setVendors] = React.useState(initialVendors);
+
+  const handleVendorAdded = (newVendor: Vendor) => {
+    setVendors((prevVendors) => [...prevVendors, newVendor]);
+  };
+
+  const handleMenuItemAdded = (vendorId: string, newMenuItem: any) => {
+    setVendors((prevVendors) =>
+      prevVendors.map((vendor) =>
+        vendor.id === vendorId
+          ? { ...vendor, menu: [...vendor.menu, newMenuItem] }
+          : vendor
+      )
+    );
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-3xl font-bold tracking-tight">Vendors</h1>
       <Card>
-        <CardHeader>
-          <CardTitle>Food Vendors</CardTitle>
-          <CardDescription>
-            Manage your food vendors and their menus.
-          </CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div>
+            <CardTitle>Food Vendors</CardTitle>
+            <CardDescription>
+              Manage your food vendors and their menus.
+            </CardDescription>
+          </div>
+          <AddVendorDialog onVendorAdded={handleVendorAdded} />
         </CardHeader>
         <CardContent>
           <Accordion type="single" collapsible className="w-full">
@@ -57,6 +83,12 @@ export default function VendorsPage() {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
+                  <div className="flex justify-end mb-4">
+                    <AddMenuItemDialog
+                      vendorId={vendor.id}
+                      onMenuItemAdded={handleMenuItemAdded}
+                    />
+                  </div>
                   <Table>
                     <TableHeader>
                       <TableRow>
