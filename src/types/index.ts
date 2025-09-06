@@ -19,3 +19,18 @@ export type MenuEvent = {
   title: string;
   description: string;
 };
+
+export type VendorMenuItem = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+};
+
+export type Vendor = {
+  id: string;
+  name: string;
+  description: string;
+  logo: string;
+  menu: VendorMenuItem[];
+};

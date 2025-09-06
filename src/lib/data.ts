@@ -1,4 +1,4 @@
-import type { Student, Order, MenuEvent } from '@/types';
+import type { Student, Order, MenuEvent, Vendor } from '@/types';
 
 export const students: Student[] = [
   {
@@ -129,5 +129,41 @@ export const recentOrders = [
     email: 'sofia.davis@email.com',
     meal: 'Caesar Salad',
     amount: '+$6.50',
+  },
+];
+
+export const vendors: Vendor[] = [
+  {
+    id: 'V001',
+    name: 'Pizza Palace',
+    description: 'The best pizza in town, made with fresh ingredients and a whole lot of love.',
+    logo: 'https://picsum.photos/200/200',
+    menu: [
+      { id: 'M001', name: 'Margherita Pizza', description: 'Classic cheese and tomato pizza.', price: 10.99 },
+      { id: 'M002', name: 'Pepperoni Pizza', description: 'Loaded with pepperoni and extra cheese.', price: 12.99 },
+      { id: 'M003', name: 'Garlic Bread', description: 'Served with marinara sauce.', price: 5.99 },
+    ],
+  },
+  {
+    id: 'V002',
+    name: 'The Taco Truck',
+    description: 'Authentic street tacos with a modern twist. Always fresh, always delicious.',
+    logo: 'https://picsum.photos/200/200',
+    menu: [
+      { id: 'M004', name: 'Carne Asada Taco', description: 'Grilled steak, onions, and cilantro.', price: 3.50 },
+      { id: 'M005', name: 'Al Pastor Taco', description: 'Marinated pork with pineapple.', price: 3.50 },
+      { id: 'M006', name: 'Chips and Guacamole', description: 'Made fresh daily.', price: 6.50 },
+    ],
+  },
+  {
+    id: 'V003',
+    name: 'Italian Express',
+    description: 'Quick and tasty Italian classics, perfect for a satisfying lunch.',
+    logo: 'https://picsum.photos/200/200',
+    menu: [
+      { id: 'M007', name: 'Spaghetti Bolognese', description: 'Rich meat sauce over spaghetti.', price: 11.99 },
+      { id: 'M008', name: 'Fettuccine Alfredo', description: 'Creamy Alfredo sauce with fettuccine.', price: 11.99 },
+      { id: 'M009', name: 'Caesar Salad', description: 'Crisp romaine with Caesar dressing.', price: 8.99 },
+    ],
   },
 ];

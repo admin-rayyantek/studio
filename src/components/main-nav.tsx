@@ -7,6 +7,7 @@ import {
   Calendar,
   Users,
   Bot,
+  Store,
 } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -21,6 +22,7 @@ const navItems = [
   { href: '/menu', label: 'Menu', icon: Calendar },
   { href: '/billing', label: 'Billing', icon: Users },
   { href: '/predictions', label: 'Predictions', icon: Bot },
+  { href: '/vendors', label: 'Vendors', icon: Store },
 ];
 
 export function MainNav() {
