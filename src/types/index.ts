@@ -1,3 +1,4 @@
+
 export type Student = {
   id: string;
   name: string;
@@ -16,8 +17,7 @@ export type Order = {
 
 export type MenuEvent = {
   date: string;
-  title: string;
-  description: string;
+  menuItems: VendorMenuItem[];
 };
 
 export type VendorMenuItem = {
