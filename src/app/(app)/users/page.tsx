@@ -1,6 +1,5 @@
 
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import {
@@ -20,7 +19,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { allUsers } from '@/lib/data';
-import { MoreHorizontal, ArrowRight } from 'lucide-react';
+import { MoreHorizontal, ArrowRight, User, CircleUser } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import {
@@ -41,6 +40,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 export default function UsersPage() {
   const [users, setUsers] = React.useState(allUsers);
@@ -116,13 +116,10 @@ export default function UsersPage() {
                 <TableRow key={user.id}>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-3">
-                      <Image
-                        alt="User avatar"
-                        className="aspect-square rounded-full object-cover"
-                        height="32"
-                        src={user.avatar}
-                        width="32"
-                      />
+                      <Avatar className="h-8 w-8">
+                        {user.gender === 'male' ? <User className="h-full w-full p-1.5 text-muted-foreground" /> : <CircleUser className="h-full w-full p-1.5 text-muted-foreground" />}
+                        <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                      </Avatar>
                       <div className="flex flex-col">
                         <span>{user.name}</span>
                         <span className="text-xs text-muted-foreground">{user.email}</span>
@@ -140,7 +137,7 @@ export default function UsersPage() {
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-2">
                         <Badge
-                        variant={user.balance < 0 ? 'destructive' : 'outline'}
+                        variant={user.balance < 0 ? 'destructive' : 'destructive'}
                         >
                         ${user.balance.toFixed(2)}
                         </Badge>

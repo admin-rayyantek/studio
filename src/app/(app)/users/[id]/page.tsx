@@ -17,7 +17,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { OrderHistoryChart } from '@/components/order-history-chart';
-import Image from 'next/image';
+import { User, CircleUser } from 'lucide-react';
 
 export default function UserDetailsPage({ params }: { params: { id: string } }) {
   const user = allUsers.find((u) => u.id === params.id);
@@ -74,7 +74,7 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
         <Card className="lg:col-span-1">
           <CardHeader className="items-center">
             <Avatar className="h-24 w-24 mb-4">
-              <AvatarImage src={user.avatar} alt={user.name} />
+               {user.gender === 'male' ? <User className="h-full w-full p-4 text-muted-foreground" /> : <CircleUser className="h-full w-full p-4 text-muted-foreground" />}
               <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
             </Avatar>
             <CardTitle className="text-2xl">{user.name}</CardTitle>

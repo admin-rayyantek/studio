@@ -1,7 +1,6 @@
 import {
   Avatar,
   AvatarFallback,
-  AvatarImage,
 } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,6 +13,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { User } from 'lucide-react';
 
 export function UserNav() {
   return (
@@ -21,7 +21,7 @@ export function UserNav() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar className="h-10 w-10">
-            <AvatarImage src="https://avatar.iran.liara.run/public/boy" alt="@admin" />
+            <User className="h-full w-full p-2 text-muted-foreground" />
             <AvatarFallback>AD</AvatarFallback>
           </Avatar>
         </Button>

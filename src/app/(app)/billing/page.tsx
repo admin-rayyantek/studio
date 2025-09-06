@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import {
   Table,
   TableBody,
@@ -15,8 +14,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { students } from '@/lib/data';
-import { MoreHorizontal } from 'lucide-react';
+import { students, allUsers } from '@/lib/data';
+import { MoreHorizontal, User, CircleUser } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -25,6 +24,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 export default function BillingPage() {
   return (
@@ -54,16 +54,13 @@ export default function BillingPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {students.map((student) => (
+              {allUsers.filter(u => u.userType.startsWith('student')).map((student) => (
                 <TableRow key={student.id}>
                   <TableCell className="hidden sm:table-cell">
-                    <Image
-                      alt="Student avatar"
-                      className="aspect-square rounded-full object-cover"
-                      height="40"
-                      src={student.avatar}
-                      width="40"
-                    />
+                    <Avatar>
+                        {student.gender === 'male' ? <User className="h-full w-full p-2 text-muted-foreground" /> : <CircleUser className="h-full w-full p-2 text-muted-foreground" />}
+                        <AvatarFallback>{student.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                    </Avatar>
                   </TableCell>
                   <TableCell className="font-medium">{student.name}</TableCell>
                   <TableCell>{student.email}</TableCell>
