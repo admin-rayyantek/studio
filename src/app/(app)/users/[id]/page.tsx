@@ -101,7 +101,7 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
               <div className="flex flex-wrap gap-1 mt-1">
                 {user.allergies && user.allergies.length > 0 ? user.allergies.map(allergy => (
                   <Badge key={allergy} variant="outline">{allergy}</Badge>
-                )) : <p>None</p>}
+                )) : <p className="text-muted-foreground">None</p>}
               </div>
             </div>
             <Separator />
