@@ -1,3 +1,5 @@
+
+'use client';
 import { KpiCard } from '@/components/kpi-card';
 import { OrderHistoryChart } from '@/components/order-history-chart';
 import { RecentOrdersCard } from '@/components/recent-orders-card';
