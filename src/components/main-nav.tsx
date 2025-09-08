@@ -8,7 +8,6 @@ import {
   Users,
   Bot,
   Store,
-  Settings,
 } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -24,7 +23,6 @@ const navItems = [
   { href: '/users', label: 'Users', icon: Users },
   { href: '/predictions', label: 'Predictions', icon: Bot },
   { href: '/vendors', label: 'Vendors', icon: Store },
-  { href: '/settings', label: 'Settings', icon: Settings },
 ];
 
 export function MainNav() {
