@@ -1,6 +1,7 @@
 
 
 
+
 export type Student = {
   id: string;
   name: string;
@@ -46,10 +47,15 @@ export type VendorMenuItem = {
 };
 
 export type Vendor = {
-  id: string;
+  id:string;
   name: string;
   description: string;
   logo: string;
   menu: VendorMenuItem[];
 };
 
+export type TodaysMenuItem = {
+  name: string;
+  ordered: number;
+  status: 'Taking Orders' | 'No Longer Taking Orders';
+}

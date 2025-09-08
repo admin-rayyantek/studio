@@ -1,4 +1,4 @@
-import type { Student, Order, MenuEvent, Vendor, User } from '@/types';
+import type { Student, Order, MenuEvent, Vendor, User, TodaysMenuItem } from '@/types';
 
 export const allergens = [
   'Milk',
@@ -224,15 +224,16 @@ export const menuEvents: MenuEvent[] = [
 ];
 
 
-export const orderHistoryData = [
-  { date: '2023-10-01', orders: 150, revenue: 12000 },
-  { date: '2023-10-02', orders: 155, revenue: 18400 },
-  { date: '2023-10-03', orders: 160, revenue: 15800 },
-  { date: '2023-10-04', orders: 145, revenue: 21600 },
-  { date: '2023-10-05', orders: 165, revenue: 13200 },
-  { date: '2023-10-06', orders: 170, revenue: 19600 },
-  { date: '2023-10-07', orders: 168, revenue: 13440 },
+export const weeklyOrderData = [
+    { day: 'Mon', male_kebab: 20, male_pide: 5, female_kebab: 5, female_pide: 1, male_total: 25, female_total: 6 },
+    { day: 'Tue', male_kebab: 15, male_pide: 10, female_kebab: 8, female_pide: 3, male_total: 25, female_total: 11 },
+    { day: 'Wed', male_kebab: 18, male_pide: 7, female_kebab: 6, female_pide: 2, male_total: 25, female_total: 8 },
+    { day: 'Thu', male_kebab: 22, male_pide: 4, female_kebab: 7, female_pide: 4, male_total: 26, female_total: 11 },
+    { day: 'Fri', male_kebab: 25, male_pide: 8, female_kebab: 10, female_pide: 5, male_total: 33, female_total: 15 },
+    { day: 'Sat', male_kebab: 10, male_pide: 3, female_kebab: 4, female_pide: 1, male_total: 13, female_total: 5 },
+    { day: 'Sun', male_kebab: 12, male_pide: 6, female_kebab: 3, female_pide: 2, male_total: 18, female_total: 5 },
 ];
+
 
 export const recentOrders = [
   {
@@ -277,10 +278,17 @@ export const recentOrders = [
   },
 ];
 
+export const todaysMenuData: TodaysMenuItem[] = [
+    { name: 'Cheese Pide', ordered: 32, status: 'Taking Orders' },
+    { name: 'Chicken Kebab', ordered: 54, status: 'Taking Orders' },
+    { name: 'Hummus & Pita', ordered: 21, status: 'Taking Orders' },
+    { name: 'Vegetable Tagine', ordered: 18, status: 'No Longer Taking Orders' },
+    { name: 'Couscous Salad', ordered: 25, status: 'Taking Orders' },
+    { name: 'Lahmacun', ordered: 15, status: 'No Longer Taking Orders' },
+];
 
 export const dashboardStats = {
-  todaysOrders: 84,
-  todaysMenu: 'Cheese Pide',
+  todaysOrders: todaysMenuData.reduce((sum, item) => sum + item.ordered, 0),
   totalActiveUsers: allUsers.filter(u => u.active).length,
   outstandingBalances: allUsers.reduce((acc, user) => user.balance < 0 ? acc + Math.abs(user.balance) : acc, 0),
   unpaidUsers: allUsers.filter(u => u.balance < 0).length,
