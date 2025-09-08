@@ -1,4 +1,4 @@
-import type { Student, Order, MenuEvent, Vendor, User, TodaysMenuItem } from '@/types';
+import type { Student, Order, MenuEvent, Vendor, User, TodaysMenuItem, RecentOrder } from '@/types';
 
 export const allergens = [
   'Milk',
@@ -235,46 +235,62 @@ export const weeklyOrderData = [
 ];
 
 
-export const recentOrders = [
+export const recentOrders: RecentOrder[] = [
   {
-    avatar: 'https://avatar.iran.liara.run/public/girl?username=Aisha+Khan',
+    id: 'RO001',
+    date: '2023-10-28',
+    studentId: 'S001',
     name: 'Aisha Khan',
     email: 'aisha.khan@example.com',
-    meal: 'Chicken Shawarma',
-    amount: '+$7.50',
-    studentId: 'S001',
+    total: 10.50,
+    items: [
+      { name: 'Chicken Kebab', quantity: 3, price: 3.50 }
+    ],
   },
   {
-    avatar: 'https://avatar.iran.liara.run/public/boy?username=Yusuf+Ahmed',
+    id: 'RO002',
+    date: '2023-10-28',
+    studentId: 'S002',
     name: 'Yusuf Ahmed',
     email: 'yusuf.ahmed@example.com',
-    meal: 'Beef Kofta',
-    amount: '+$8.00',
-    studentId: 'S002',
+    total: 13.00,
+    items: [
+        { name: 'Lamb Shawarma', quantity: 2, price: 3.50 },
+        { name: 'Hummus & Pita', quantity: 1, price: 6.50 },
+    ],
   },
   {
-    avatar: 'https://avatar.iran.liara.run/public/girl?username=Fatima+Al-Fassi',
+    id: 'RO003',
+    date: '2023-10-27',
+    studentId: 'S003',
     name: 'Fatima Al-Fassi',
     email: 'fatima.alfassi@example.com',
-    meal: 'Vegetable Tagine',
-    amount: '+$7.00',
-    studentId: 'S003',
+    total: 11.99,
+    items: [
+        { name: 'Chicken Tagine', quantity: 1, price: 11.99 },
+    ],
   },
   {
-    avatar: 'https://avatar.iran.liara.run/public/boy?username=Omar+Abdullah',
+    id: 'RO004',
+    date: '2023-10-27',
+    studentId: 'S004',
     name: 'Omar Abdullah',
     email: 'omar.abdullah@example.com',
-    meal: 'Lamb Burger & Fries',
-    amount: '+$8.50',
-    studentId: 'S004',
+    total: 12.99,
+    items: [
+      { name: 'Cheese Pide', quantity: 1, price: 12.99 },
+    ],
   },
   {
-    avatar: 'https://avatar.iran.liara.run/public/girl?username=Layla+Ibrahim',
+    id: 'RO005',
+    date: '2023-10-26',
+    studentId: 'S005',
     name: 'Layla Ibrahim',
     email: 'layla.ibrahim@example.com',
-    meal: 'Fattoush Salad',
-    amount: '+$6.50',
-    studentId: 'S005',
+    total: 8.99,
+    items: [
+      { name: 'Couscous Salad', quantity: 1, price: 8.99 },
+    ],
   },
 ];
 

@@ -2,6 +2,7 @@
 
 
 
+
 export type Student = {
   id: string;
   name: string;
@@ -32,6 +33,22 @@ export type Order = {
   amount: number;
   date: string;
 };
+
+export type RecentOrderItem = {
+    name: string;
+    quantity: number;
+    price: number;
+}
+
+export type RecentOrder = {
+    id: string;
+    date: string;
+    studentId: string;
+    name: string;
+    email: string;
+    total: number;
+    items: RecentOrderItem[];
+}
 
 export type MenuEvent = {
   date: string;
