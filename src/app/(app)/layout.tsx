@@ -12,6 +12,7 @@ import { MainNav } from '@/components/main-nav';
 import { Bell, MessageCircle, Search, Settings } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function AppLayout({
   children,
@@ -54,9 +55,11 @@ export default function AppLayout({
                 <Bell className="h-5 w-5" />
                 <span className="sr-only">Notifications</span>
             </Button>
-             <Button variant="ghost" size="icon" className="rounded-full">
-                <Settings className="h-5 w-5" />
-                <span className="sr-only">Settings</span>
+             <Button variant="ghost" size="icon" className="rounded-full" asChild>
+                <Link href="/settings">
+                    <Settings className="h-5 w-5" />
+                    <span className="sr-only">Settings</span>
+                </Link>
             </Button>
             <UserNav />
           </div>
