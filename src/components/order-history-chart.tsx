@@ -1,13 +1,13 @@
+
 'use client';
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList } from 'recharts';
 import {
   ChartContainer,
-  ChartTooltipContent,
   type ChartConfig,
 } from '@/components/ui/chart';
 import { weeklyOrderData } from '@/lib/data';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import { Badge } from './ui/badge';
 
 const chartConfig = {
@@ -78,8 +78,13 @@ export function OrderHistoryChart() {
             />
             <Tooltip content={<CustomTooltip />} cursor={{fill: 'hsl(var(--accent))', radius: 4}} />
             <Bar dataKey="male_kebab" stackId="male" fill="var(--color-male_kebab)" radius={[4, 4, 0, 0]} barSize={30} >
-                <LabelList dataKey="male_total" position="top" offset={10} className="fill-foreground text-xs" formatter={(value: number, props: any) => {
-                    const entry = weeklyOrderData[props.index];
+                <LabelList dataKey="male_total" position="top" offset={10} className="fill-foreground text-xs" formatter={(value: number, _props: any, index: number) => {
+                    const entry = weeklyOrderData[index];
+                    if (!entry) return '';
+                    // Only show the label on the top-most bar of the stack.
+                    // This logic assumes female_total will be rendered on top of male_total, which isn't guaranteed by stacking.
+                    // A better approach is needed if stacking order changes.
+                    // For now, this is a simple way to avoid label overlap.
                     return entry.female_total > 0 ? '' : value;
                 }} />
             </Bar>
