@@ -311,3 +311,18 @@ export const dashboardStats = {
   mostSellingItem: 'Chicken Kebab',
   financialAidLastMonth: 450.75,
 };
+
+export const monthlyUserOrdersData = [
+  { month: 'Jan', total: 75.50 },
+  { month: 'Feb', total: 90.00 },
+  { month: 'Mar', total: 110.25 },
+  { month: 'Apr', total: 85.75 },
+  { month: 'May', total: 120.00 },
+  { month: 'Jun', total: 95.50 },
+  { month: 'Jul', total: 60.00 },
+  { month: 'Aug', total: 78.25 },
+  { month: 'Sep', total: 105.00 },
+  { month: 'Oct', total: 130.50 },
+  { month: 'Nov', total: 0 },
+  { month: 'Dec', total: 0 },
+];

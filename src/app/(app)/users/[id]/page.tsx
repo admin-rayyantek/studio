@@ -16,7 +16,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { OrderHistoryChart } from '@/components/order-history-chart';
+import { MonthlyUserOrdersChart } from '@/components/monthly-user-orders-chart';
 import { User, CircleUser } from 'lucide-react';
 
 export default function UserDetailsPage({ params }: { params: { id: string } }) {
@@ -122,10 +122,10 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
           <Card>
             <CardHeader>
               <CardTitle>Order History</CardTitle>
-              <CardDescription>A list of recent orders placed by the user.</CardDescription>
+              <CardDescription>A summary of the user's monthly order totals for the year.</CardDescription>
             </CardHeader>
             <CardContent>
-              <OrderHistoryChart />
+              <MonthlyUserOrdersChart />
             </CardContent>
           </Card>
            <Card>
