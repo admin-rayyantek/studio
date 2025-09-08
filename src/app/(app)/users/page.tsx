@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { allUsers, User } from '@/lib/data';
-import { MoreHorizontal, ArrowRight, User as UserIcon, CircleUser, Edit, Trash2 } from 'lucide-react';
+import { MoreHorizontal, ArrowRight, User as UserIcon, CircleUser } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import {
@@ -27,7 +27,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -38,38 +37,43 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
+
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { AddUserDialog } from '@/components/add-user-dialog';
 import { EditUserDialog } from '@/components/edit-user-dialog';
+import { useToast } from '@/hooks/use-toast';
 
 export default function UsersPage() {
   const [users, setUsers] = React.useState<User[]>(allUsers);
+  const { toast } = useToast();
 
   const handleUserAdded = (newUser: User) => {
     setUsers((prevUsers) => [...prevUsers, newUser]);
+     toast({
+      title: 'User Added',
+      description: `${newUser.name} has been added to the system.`
+    })
   };
 
   const handleUserUpdated = (updatedUser: User) => {
     setUsers((prevUsers) =>
       prevUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user))
     );
+     toast({
+      title: 'User Updated',
+      description: `${updatedUser.name}'s profile has been updated.`
+    })
   };
 
   const handleUserDeleted = (userId: string) => {
     setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+     toast({
+      title: 'User Deleted',
+      description: `The user has been removed from the system.`
+    })
   };
 
 
@@ -195,7 +199,7 @@ export default function UsersPage() {
                             <ArrowRight className="ml-auto h-4 w-4" />
                           </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
+                        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                             <EditUserDialog user={user} onUserUpdated={handleUserUpdated} onUserDeleted={handleUserDeleted} />
                         </DropdownMenuItem>
                       </DropdownMenuContent>

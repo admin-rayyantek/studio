@@ -1,10 +1,14 @@
+
+'use client';
+
 import { notFound } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import * as React from 'react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { allUsers, userOrderHistory, userPaymentHistory } from '@/lib/data';
+import { allUsers, userOrderHistory, userPaymentHistory, User as UserType } from '@/lib/data';
 import {
   Dialog,
   DialogContent,
@@ -20,13 +24,37 @@ import { MonthlyUserOrdersChart } from '@/components/monthly-user-orders-chart';
 import { User, CircleUser } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Switch } from '@/components/ui/switch';
+import { useToast } from '@/hooks/use-toast';
+import { EditUserDialog } from '@/components/edit-user-dialog';
+
 
 export default function UserDetailsPage({ params }: { params: { id: string } }) {
-  const user = allUsers.find((u) => u.id === params.id);
+  const [user, setUser] = React.useState(allUsers.find((u) => u.id === params.id));
+  const { toast } = useToast();
 
   if (!user) {
     notFound();
   }
+
+  const handleUserUpdated = (updatedUser: UserType) => {
+    setUser(updatedUser);
+    toast({
+        title: 'User Updated',
+        description: `${updatedUser.name}'s profile has been updated.`
+    })
+  };
+
+  const handleUserDeleted = (userId: string) => {
+    // In a real app, you'd redirect or show a "user deleted" message.
+    // For this prototype, we'll just show a toast.
+    console.log(`User ${userId} deleted`);
+    toast({
+        title: 'User Deleted',
+        description: `The user has been removed from the system.`
+    })
+    // In a real app you would redirect, e.g., router.push('/users');
+  };
 
   const payNowDialog = (
     <Dialog>
@@ -74,7 +102,11 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
       <h1 className="text-3xl font-bold tracking-tight">User Details</h1>
       <div className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-1">
-          <CardHeader className="items-center">
+          <CardHeader className="items-center relative">
+            <div className="absolute top-4 right-4 flex gap-2">
+                 <Button variant="outline" size="sm" onClick={() => toast({ title: 'Password Reset', description: `A password reset link has been sent to ${user.email}.`})}>Reset Password</Button>
+                 <EditUserDialog user={user} onUserUpdated={handleUserUpdated} onUserDeleted={handleUserDeleted} triggerType="button" />
+            </div>
             <Avatar className="h-24 w-24 mb-4">
                {user.gender === 'male' ? <User className="h-full w-full p-4 text-muted-foreground" /> : <CircleUser className="h-full w-full p-4 text-muted-foreground" />}
               <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
@@ -118,12 +150,20 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
                 <span className="text-muted-foreground">Outstanding Balance</span>
                 {user.balance < 0 ? payNowDialog : <span>-</span>}
             </div>
+             <Separator />
+              <div className="flex justify-between items-center py-2">
+                <span className="text-muted-foreground">Account Status</span>
+                <div className="flex items-center gap-2">
+                    <Switch id="active-status" checked={user.active} onCheckedChange={(checked) => handleUserUpdated({...user, active: checked})} />
+                    <Label htmlFor="active-status">{user.active ? 'Active' : 'Inactive'}</Label>
+                </div>
+            </div>
           </CardContent>
         </Card>
         <div className="lg:col-span-2 space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Monthly Totals</CardTitle>
+              <CardTitle>Monthly Order Totals</CardTitle>
               <CardDescription>A summary of the user's monthly order totals for the year.</CardDescription>
             </CardHeader>
             <CardContent>

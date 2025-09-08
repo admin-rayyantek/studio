@@ -69,9 +69,10 @@ type EditUserDialogProps = {
   user: User;
   onUserUpdated: (updatedUser: User) => void;
   onUserDeleted: (userId: string) => void;
+  triggerType?: 'button' | 'menu-item'
 };
 
-export function EditUserDialog({ user, onUserUpdated, onUserDeleted }: EditUserDialogProps) {
+export function EditUserDialog({ user, onUserUpdated, onUserDeleted, triggerType = 'menu-item' }: EditUserDialogProps) {
   const [open, setOpen] = React.useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -112,13 +113,22 @@ export function EditUserDialog({ user, onUserUpdated, onUserDeleted }: EditUserD
     setOpen(false);
   }
 
+  const trigger = triggerType === 'button' ? (
+    <Button variant="outline" size="sm">
+      <Edit className="mr-2 h-4 w-4" />
+      Edit User
+    </Button>
+  ) : (
+     <button className="relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 w-full">
+        <Edit className="h-4 w-4" />
+        Edit User
+    </button>
+  )
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 w-full">
-            <Edit className="h-4 w-4" />
-            Edit User
-        </button>
+        {trigger}
       </DialogTrigger>
       <DialogContent className="max-w-2xl">
         <DialogHeader>

@@ -1,7 +1,7 @@
 
 'use client';
 
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip, LabelList } from 'recharts';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip, LabelList, LineChart, Line } from 'recharts';
 import {
   ChartContainer,
   type ChartConfig,
@@ -19,11 +19,11 @@ export function MonthlyUserOrdersChart() {
   return (
     <ChartContainer config={chartConfig} className="h-[300px] w-full">
         <ResponsiveContainer>
-            <AreaChart data={monthlyUserOrdersData} accessibilityLayer margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
+            <LineChart data={monthlyUserOrdersData} accessibilityLayer margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
                 <defs>
                     <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="var(--color-total)" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="var(--color-total)" stopOpacity={0}/>
+                        <stop offset="95%" stopColor="var(--color-total)" stopOpacity={0.1}/>
                     </linearGradient>
                 </defs>
                 <CartesianGrid vertical={false} />
@@ -44,8 +44,9 @@ export function MonthlyUserOrdersChart() {
                     contentStyle={{borderRadius: 'var(--radius)', border: '1px solid hsl(var(--border))'}}
                     formatter={(value) => [`$${(value as number).toFixed(2)}`, 'Total']}
                 />
-                <Area type="monotone" dataKey="total" stroke="var(--color-total)" fillOpacity={1} fill="url(#colorTotal)" />
-            </AreaChart>
+                <Line type="monotone" dataKey="total" stroke="var(--color-total)" strokeWidth={2} dot={false} />
+                 <Area type="monotone" dataKey="total" fillOpacity={1} fill="url(#colorTotal)" stroke="none" />
+            </LineChart>
         </ResponsiveContainer>
     </ChartContainer>
   )
