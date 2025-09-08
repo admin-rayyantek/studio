@@ -1,7 +1,7 @@
 
 'use client';
 
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip, LabelList } from 'recharts';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip, LabelList } from 'recharts';
 import {
   ChartContainer,
   type ChartConfig,
@@ -19,7 +19,13 @@ export function MonthlyUserOrdersChart() {
   return (
     <ChartContainer config={chartConfig} className="h-[300px] w-full">
         <ResponsiveContainer>
-            <BarChart data={monthlyUserOrdersData} accessibilityLayer margin={{ top: 20 }}>
+            <AreaChart data={monthlyUserOrdersData} accessibilityLayer margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
+                <defs>
+                    <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="var(--color-total)" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="var(--color-total)" stopOpacity={0}/>
+                    </linearGradient>
+                </defs>
                 <CartesianGrid vertical={false} />
                 <XAxis
                     dataKey="month"
@@ -38,16 +44,8 @@ export function MonthlyUserOrdersChart() {
                     contentStyle={{borderRadius: 'var(--radius)', border: '1px solid hsl(var(--border))'}}
                     formatter={(value) => [`$${(value as number).toFixed(2)}`, 'Total']}
                 />
-                <Bar dataKey="total" fill="var(--color-total)" radius={[4, 4, 0, 0]}>
-                    <LabelList 
-                        dataKey="total" 
-                        position="top" 
-                        offset={10} 
-                        className="fill-foreground text-xs"
-                        formatter={(value: number) => value > 0 ? `$${value.toFixed(2)}` : ''}
-                    />
-                </Bar>
-            </BarChart>
+                <Area type="monotone" dataKey="total" stroke="var(--color-total)" fillOpacity={1} fill="url(#colorTotal)" />
+            </AreaChart>
         </ResponsiveContainer>
     </ChartContainer>
   )
