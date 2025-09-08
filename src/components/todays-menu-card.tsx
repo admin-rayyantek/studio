@@ -18,7 +18,7 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { todaysMenuData } from '@/lib/data';
-import { ChevronDown, Utensils, Clock } from 'lucide-react';
+import { ChevronDown, Utensils, Clock, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function TodaysMenuCard() {
@@ -30,13 +30,21 @@ export function TodaysMenuCard() {
   // In a real app, this would come from a settings/config object.
   const overallStatus = 'Taking Orders';
   const orderTime = '8:00 AM - 10:30 AM';
+  
+  const isTakingOrders = overallStatus === 'Taking Orders';
 
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
         <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-            <Utensils className="h-6 w-6 text-green-600" />
+          <div className={cn(
+            "flex h-12 w-12 items-center justify-center rounded-full",
+            isTakingOrders ? "bg-green-100" : "bg-gray-100"
+          )}>
+            <Utensils className={cn(
+              "h-6 w-6",
+               isTakingOrders ? "text-green-600" : "text-gray-600"
+            )} />
           </div>
           <div>
             <CardTitle>Today's Menu</CardTitle>
@@ -47,10 +55,21 @@ export function TodaysMenuCard() {
         </div>
       </CardHeader>
       <CardContent className="flex-1">
-        <div className="mb-4 flex items-center gap-2 rounded-lg border bg-secondary p-3">
-            <Clock className="h-5 w-5 text-muted-foreground" />
+        <div className={cn(
+            "mb-4 flex items-center gap-2 rounded-lg border p-3",
+            isTakingOrders ? "bg-green-50 border-green-200" : "bg-secondary"
+        )}>
+            {isTakingOrders ? (
+                <Clock className="h-5 w-5 text-green-600" />
+            ): (
+                <XCircle className="h-5 w-5 text-muted-foreground" />
+            )}
+            
             <div>
-                <p className="text-sm font-medium">{overallStatus}</p>
+                <p className={cn(
+                    "text-sm font-medium",
+                    isTakingOrders ? "text-green-700" : "text-muted-foreground"
+                )}>{overallStatus}</p>
                 <p className="text-xs text-muted-foreground">Cut-off time: {orderTime}</p>
             </div>
         </div>
@@ -90,5 +109,4 @@ export function TodaysMenuCard() {
     </Card>
   );
 }
-
 
