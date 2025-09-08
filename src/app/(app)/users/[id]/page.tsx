@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { allUsers } from '@/lib/data';
+import { allUsers, userOrderHistory, userPaymentHistory } from '@/lib/data';
 import {
   Dialog,
   DialogContent,
@@ -18,6 +18,8 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { MonthlyUserOrdersChart } from '@/components/monthly-user-orders-chart';
 import { User, CircleUser } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 export default function UserDetailsPage({ params }: { params: { id: string } }) {
   const user = allUsers.find((u) => u.id === params.id);
@@ -121,7 +123,7 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
         <div className="lg:col-span-2 space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Order History</CardTitle>
+              <CardTitle>Monthly Totals</CardTitle>
               <CardDescription>A summary of the user's monthly order totals for the year.</CardDescription>
             </CardHeader>
             <CardContent>
@@ -130,11 +132,64 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
           </Card>
            <Card>
             <CardHeader>
-              <CardTitle>Data Statistics</CardTitle>
-              <CardDescription>Key statistics and insights about user activity.</CardDescription>
+              <CardTitle>Activity History</CardTitle>
+              <CardDescription>A detailed log of the user's orders and payments.</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground text-sm">Data statistics will be shown here.</p>
+              <Tabs defaultValue="orders">
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="orders">Order History</TabsTrigger>
+                    <TabsTrigger value="payments">Payment History</TabsTrigger>
+                </TabsList>
+                <TabsContent value="orders">
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Order ID</TableHead>
+                                <TableHead>Date</TableHead>
+                                <TableHead>Items</TableHead>
+                                <TableHead className="text-right">Total</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {userOrderHistory.map(order => (
+                                <TableRow key={order.id}>
+                                    <TableCell className="font-mono">{order.id}</TableCell>
+                                    <TableCell>{order.date}</TableCell>
+                                    <TableCell>{order.items.join(', ')}</TableCell>
+                                    <TableCell className="text-right">${order.total.toFixed(2)}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TabsContent>
+                <TabsContent value="payments">
+                     <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Payment ID</TableHead>
+                                <TableHead>Date</TableHead>
+                                <TableHead>Method</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead className="text-right">Amount</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {userPaymentHistory.map(payment => (
+                                <TableRow key={payment.id}>
+                                    <TableCell className="font-mono">{payment.id}</TableCell>
+                                    <TableCell>{payment.date}</TableCell>
+                                    <TableCell className="capitalize">{payment.method}</TableCell>
+                                    <TableCell>
+                                        <Badge variant={payment.status === 'Paid' ? 'secondary' : 'destructive'} className="capitalize">{payment.status}</Badge>
+                                    </TableCell>
+                                    <TableCell className="text-right">${payment.amount.toFixed(2)}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TabsContent>
+              </Tabs>
             </CardContent>
           </Card>
         </div>

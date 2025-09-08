@@ -1,4 +1,4 @@
-import type { Student, Order, MenuEvent, Vendor, User, TodaysMenuItem, RecentOrder } from '@/types';
+import type { Student, Order, MenuEvent, Vendor, User, TodaysMenuItem, RecentOrder, UserOrder, UserPayment } from '@/types';
 
 export const allergens = [
   'Milk',
@@ -326,3 +326,19 @@ export const monthlyUserOrdersData = [
   { month: 'Nov', total: 0 },
   { month: 'Dec', total: 0 },
 ];
+
+export const userOrderHistory: UserOrder[] = [
+  { id: 'ORD789', date: '2023-10-26', items: ['Chicken Kebab'], total: 7.50 },
+  { id: 'ORD790', date: '2023-10-22', items: ['Cheese Pide', 'Ayran'], total: 18.98 },
+  { id: 'ORD791', date: '2023-10-18', items: ['Lamb Shawarma', 'Hummus & Pita'], total: 10.00 },
+  { id: 'ORD792', date: '2023-10-15', items: ['Chicken Tagine'], total: 11.99 },
+  { id: 'ORD793', date: '2023-10-11', items: ['Chicken Kebab'], total: 7.50 },
+]
+
+export const userPaymentHistory: UserPayment[] = [
+  { id: 'PAY321', date: '2023-10-25', amount: 50.00, method: 'card', status: 'Paid' },
+  { id: 'PAY322', date: '2023-09-25', amount: 50.00, method: 'card', status: 'Paid' },
+  { id: 'PAY323', date: '2023-08-25', amount: 50.00, method: 'card', status: 'Paid' },
+  { id: 'PAY324', date: '2023-07-25', amount: 25.00, method: 'cash', status: 'Paid' },
+  { id: 'PAY325', date: '2023-06-25', amount: 50.00, method: 'card', status: 'Paid' },
+]

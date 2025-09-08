@@ -3,6 +3,7 @@
 
 
 
+
 export type Student = {
   id: string;
   name: string;
@@ -75,4 +76,19 @@ export type TodaysMenuItem = {
   name: string;
   ordered: number;
   status: 'Taking Orders' | 'No Longer Taking Orders';
+}
+
+export type UserOrder = {
+  id: string;
+  date: string;
+  items: string[];
+  total: number;
+}
+
+export type UserPayment = {
+  id: string;
+  date: string;
+  amount: number;
+  method: 'card' | 'cash' | 'FACTS' | 'financial-aid';
+  status: 'Paid' | 'Failed';
 }
