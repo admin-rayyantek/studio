@@ -99,13 +99,13 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-3xl font-bold tracking-tight">User Details</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold tracking-tight">User Details</h1>
+        <EditUserDialog user={user} onUserUpdated={handleUserUpdated} onUserDeleted={handleUserDeleted} triggerType="button" />
+      </div>
       <div className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-1">
-          <CardHeader className="items-center relative">
-            <div className="absolute top-4 right-4">
-                 <EditUserDialog user={user} onUserUpdated={handleUserUpdated} onUserDeleted={handleUserDeleted} triggerType="button" />
-            </div>
+          <CardHeader className="items-center">
             <Avatar className="h-24 w-24 mb-4">
                {user.gender === 'male' ? <User className="h-full w-full p-4 text-muted-foreground" /> : <CircleUser className="h-full w-full p-4 text-muted-foreground" />}
               <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
