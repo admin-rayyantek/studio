@@ -103,8 +103,7 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
       <div className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-1">
           <CardHeader className="items-center relative">
-            <div className="absolute top-4 right-4 flex gap-2">
-                 <Button variant="outline" size="sm" onClick={() => toast({ title: 'Password Reset', description: `A password reset link has been sent to ${user.email}.`})}>Reset Password</Button>
+            <div className="absolute top-4 right-4">
                  <EditUserDialog user={user} onUserUpdated={handleUserUpdated} onUserDeleted={handleUserDeleted} triggerType="button" />
             </div>
             <Avatar className="h-24 w-24 mb-4">
@@ -157,6 +156,11 @@ export default function UserDetailsPage({ params }: { params: { id: string } }) 
                     <Switch id="active-status" checked={user.active} onCheckedChange={(checked) => handleUserUpdated({...user, active: checked})} />
                     <Label htmlFor="active-status">{user.active ? 'Active' : 'Inactive'}</Label>
                 </div>
+            </div>
+            <Separator />
+            <div className="flex justify-between items-center py-2">
+                <span className="text-muted-foreground">Reset Password</span>
+                <Button variant="outline" size="sm" onClick={() => toast({ title: 'Password Reset', description: `A password reset link has been sent to ${user.email}.`})}>Send Reset Link</Button>
             </div>
           </CardContent>
         </Card>

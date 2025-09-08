@@ -19,7 +19,7 @@ export function MonthlyUserOrdersChart() {
   return (
     <ChartContainer config={chartConfig} className="h-[300px] w-full">
         <ResponsiveContainer>
-            <LineChart data={monthlyUserOrdersData} accessibilityLayer margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
+            <AreaChart data={monthlyUserOrdersData} accessibilityLayer margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
                 <defs>
                     <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="var(--color-total)" stopOpacity={0.8}/>
@@ -44,9 +44,8 @@ export function MonthlyUserOrdersChart() {
                     contentStyle={{borderRadius: 'var(--radius)', border: '1px solid hsl(var(--border))'}}
                     formatter={(value) => [`$${(value as number).toFixed(2)}`, 'Total']}
                 />
-                <Line type="monotone" dataKey="total" stroke="var(--color-total)" strokeWidth={2} dot={false} />
-                 <Area type="monotone" dataKey="total" fillOpacity={1} fill="url(#colorTotal)" stroke="none" />
-            </LineChart>
+                <Area type="monotone" dataKey="total" stroke="var(--color-total)" strokeWidth={2} fillOpacity={1} fill="url(#colorTotal)" />
+            </AreaChart>
         </ResponsiveContainer>
     </ChartContainer>
   )
