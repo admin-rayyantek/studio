@@ -77,7 +77,8 @@ export function OrderHistoryChart() {
                 tickCount={4}
             />
             <Tooltip content={<CustomTooltip />} cursor={{fill: 'hsl(var(--accent))', radius: 4}} />
-            <Bar dataKey="male_kebab" stackId="male" fill="var(--color-male_kebab)" radius={[4, 4, 0, 0]} barSize={30} >
+            <Bar dataKey="male_kebab" stackId="male" fill="var(--color-male_kebab)" barSize={30} />
+            <Bar dataKey="male_pide" stackId="male" fill="var(--color-male_pide)" radius={[4, 4, 0, 0]} barSize={30} >
                 <LabelList dataKey="male_total" position="top" offset={10} className="fill-foreground text-xs" formatter={(value: number, _props: any, index: number) => {
                     const entry = weeklyOrderData[index];
                     if (!entry) return '';
@@ -88,12 +89,11 @@ export function OrderHistoryChart() {
                     return entry.female_total > 0 ? '' : value;
                 }} />
             </Bar>
-            <Bar dataKey="male_pide" stackId="male" fill="var(--color-male_pide)" barSize={30} />
             
-            <Bar dataKey="female_kebab" stackId="female" fill="var(--color-female_kebab)" radius={[4, 4, 0, 0]} barSize={30}>
+            <Bar dataKey="female_kebab" stackId="female" fill="var(--color-female_kebab)" barSize={30} />
+            <Bar dataKey="female_pide" stackId="female" fill="var(--color-female_pide)" radius={[4, 4, 0, 0]} barSize={30} >
                  <LabelList dataKey="female_total" position="top" offset={10} className="fill-foreground text-xs" />
             </Bar>
-            <Bar dataKey="female_pide" stackId="female" fill="var(--color-female_pide)" barSize={30} />
           </BarChart>
       </ResponsiveContainer>
     </ChartContainer>
